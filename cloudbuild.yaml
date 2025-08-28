@@ -1,0 +1,33 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'asia-south1-docker.pkg.dev/gke-learning-470213/gke-repo/quickstart-image', './app1' ]
+  id: 'Build Docker Image'
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia-south1-docker.pkg.dev/gke-learning-470213/gke-repo/quickstart-image' ]
+  id: 'Push Docker Image'
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'asia-south1-docker.pkg.dev/gke-learning-470213/gke-repo/flask-image', './app2' ]
+  id: 'Build Docker Image2'
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia-south1-docker.pkg.dev/gke-learning-470213/gke-repo/flask-image' ]
+  id: 'Push Docker Image2'
+
+
+- name: 'google/cloud-sdk:latest'
+  entrypoint: 'sh'
+  args:
+  - -xe
+  - -c
+  - |
+    gcloud deploy apply --file deploy/pipeline.yaml --region=asia-south1
+    gcloud deploy apply --file deploy/dev.yaml --region=asia-south1
+    gcloud deploy apply --file deploy/dev.yaml --region=asia-south2
+
+    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=asia-south1 --from-k8s-manifest=./kubernetes/app1.yaml
+    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=asia-south2 --from-k8s-manifest=./kubernetes/app2.yaml
+
+options:
+  logging: CLOUD_LOGGING_ONLY
