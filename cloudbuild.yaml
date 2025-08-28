@@ -24,10 +24,10 @@ steps:
   - |
     gcloud deploy apply --file deploy/pipeline.yaml --region=asia-south1
     gcloud deploy apply --file deploy/dev.yaml --region=asia-south1
-    gcloud deploy apply --file deploy/dev.yaml --region=asia-south2
+    gcloud deploy apply --file deploy/prod.yaml --region=asia-south1
 
     gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=asia-south1 --from-k8s-manifest=./kubernetes/app1.yaml
-    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=asia-south2 --from-k8s-manifest=./kubernetes/app2.yaml
+    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=asia-south1 --from-k8s-manifest=./kubernetes/app2.yaml
 
 options:
   logging: CLOUD_LOGGING_ONLY

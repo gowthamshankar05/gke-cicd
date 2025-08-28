@@ -7,9 +7,12 @@ metadata:
 description: cicd delivery pipeline
 serialPipeline:
   stages:
-  - targetId: dev
+  - targetId: dev-asia-south1
     # profiles:
     # - dev
   # - targetId: staging
   #   profiles:
   #   - staging
+  - targetId: prod-asia-south2
+  #   profiles:
+  #   - prod

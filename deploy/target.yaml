@@ -1,0 +1,16 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: dev-asia-south1
+description: "Dev cluster in asia-south1"
+gke:
+  cluster: projects/gke-learning-470213/locations/asia-south1/clusters/cluster-1
+
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: prod-asia-south2
+description: "Dev cluster in asia-south2"
+gke:
+  cluster: projects/gke-learning-470213/locations/asia-south2/clusters/cluster-1
