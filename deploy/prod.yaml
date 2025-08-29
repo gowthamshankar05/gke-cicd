@@ -7,4 +7,4 @@ metadata:
 description: prod
 requireApproval: true
 gke:
-  cluster: projects/gke-learning-470213/locations/asia-south2-a/clusters/cluster-1
+  cluster: projects/gke-learning-470213/locations/asia-south2-a/clusters/cluster-2
