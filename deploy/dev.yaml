@@ -6,4 +6,4 @@ metadata:
   labels: {}
 description: dev
 gke:
-  cluster: projects/gke-learning-470213/locations/asia-south1/clusters/cluster-1
+  cluster: projects/gke-learning-470213/locations/asia-south1-a/clusters/cluster-1
